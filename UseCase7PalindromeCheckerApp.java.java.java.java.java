@@ -1,7 +1,8 @@
 import java.util.Scanner;
-import java.util.Stack;
+import java.util.Deque;
+import java.util.ArrayDeque;
 
-public class UseCase5PalindromeCheckerApp {
+public class UseCase7PalindromeCheckerApp {
 
     static final String APP_VERSION = "1.0";
 
@@ -10,38 +11,38 @@ public class UseCase5PalindromeCheckerApp {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("======================================");
-        System.out.println("      STACK BASED PALINDROME CHECK    ");
+        System.out.println("     DEQUE BASED PALINDROME CHECK     ");
         System.out.println("======================================");
         System.out.println("Application Name : Palindrome Checker App");
         System.out.println("Application Version : " + APP_VERSION);
         System.out.println("======================================");
 
-        // Take user input
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
-        // Create Stack
-        Stack<Character> stack = new Stack<>();
+        // Create Deque
+        Deque<Character> deque = new ArrayDeque<>();
 
-        // Push characters into stack
+        // Insert characters into deque
         for (int i = 0; i < input.length(); i++) {
-            stack.push(input.charAt(i));
+            deque.addLast(input.charAt(i));
         }
 
         boolean isPalindrome = true;
 
-        // Pop characters and compare
-        for (int i = 0; i < input.length(); i++) {
+        // Compare front and rear until empty
+        while (deque.size() > 1) {
 
-            char poppedChar = stack.pop();
+            char front = deque.removeFirst();  // Remove from front
+            char rear = deque.removeLast();    // Remove from rear
 
-            if (input.charAt(i) != poppedChar) {
+            if (front != rear) {
                 isPalindrome = false;
                 break;
             }
         }
 
-        // Print result
+        // Display result
         if (isPalindrome) {
             System.out.println("Result: The string is a PALINDROME.");
         } else {
